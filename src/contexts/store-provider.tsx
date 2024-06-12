@@ -11,6 +11,9 @@ interface StoreProviderProps {
   readonly children: ReactNode;
 }
 
+/**
+ * Provides the Redux store to the application.
+ */
 export const StoreProvider = (props: StoreProviderProps) => {
   const { children } = props;
   const storeRef = useRef<AppStore | null>(null);

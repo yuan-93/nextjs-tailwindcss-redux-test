@@ -2,10 +2,10 @@
 
 import { PostDeleteButton } from "@/components/post/post-delete-button";
 import { Link } from "@/components/ui/link";
-import { PostStatus, selectPost } from "@/lib/redux/features/post/post-slice";
+import { selectPost } from "@/lib/redux/features/post/post-slice";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { postUpdatePath } from "@/lib/route-paths";
-import { Post } from "@/models/post";
+import { Post, PostStatus } from "@/models/post";
 
 interface PostCardProps {
   post: Post;

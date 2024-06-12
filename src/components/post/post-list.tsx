@@ -1,13 +1,10 @@
 "use client";
 
-import {
-  PostStatus,
-  listPosts,
-  selectPost,
-} from "@/lib/redux/features/post/post-slice";
+import { listPosts, selectPost } from "@/lib/redux/features/post/post-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useEffect } from "react";
 import { PostCard } from "./post-card";
+import { PostStatus } from "@/models/post";
 
 export function PostList() {
   const dispatch = useAppDispatch();

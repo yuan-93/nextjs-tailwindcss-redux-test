@@ -1,12 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  PostStatus,
-  deletePost,
-  selectPost,
-} from "@/lib/redux/features/post/post-slice";
+import { deletePost, selectPost } from "@/lib/redux/features/post/post-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { PostStatus } from "@/models/post";
 
 interface PostDeleteButtonProps {
   id: number;

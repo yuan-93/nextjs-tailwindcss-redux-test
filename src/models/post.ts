@@ -19,3 +19,14 @@ export interface Post {
    */
   body: string;
 }
+
+/**
+ * Represents the status of a post.
+ */
+export enum PostStatus {
+  INIT = "init",
+  IDLE = "idle",
+  LOADING = "loading",
+  UPDATING = "updating",
+  ERROR = "error",
+}

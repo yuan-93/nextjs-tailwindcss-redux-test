@@ -3,6 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+/**
+ * A button that navigates back to the previous page using nextjs router.
+ */
 export function BackButton() {
   const router = useRouter();
 

@@ -4,6 +4,9 @@ interface LinkProps extends NextLinkProps {
   children?: React.ReactNode;
 }
 
+/**
+ * Renders a Nextjs link component with the provided props.
+ */
 export function Link(props: LinkProps) {
   const { children, href } = props;
   return (

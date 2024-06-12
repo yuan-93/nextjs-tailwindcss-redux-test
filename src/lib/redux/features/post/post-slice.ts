@@ -1,22 +1,40 @@
 import { createAppSlice } from "@/lib/redux/createAppSlice";
 import { PostApi } from "@/lib/redux/features/post/post-api";
-import { Post } from "@/models/post";
+import { Post, PostStatus } from "@/models/post";
 
-export enum PostStatus {
-  INIT = "init",
-  IDLE = "idle",
-  LOADING = "loading",
-  UPDATING = "updating",
-  ERROR = "error",
-}
-
+/**
+ * Represents the state of the post slice in the Redux store.
+ */
 export interface PostSliceState {
+  /**
+   * An array of posts.
+   */
   posts?: Post[];
+
+  /**
+   * The current status of the post slice.
+   * init: The initial state of the slice.
+   * idle: The slice is not performing any operation.
+   * loading: The slice is fetching data from the server.
+   * error: An error occurred while fetching data from the server.
+   * updating: The slice is updating data locally.
+   */
   status: "init" | "idle" | "loading" | "error" | "updating";
+
+  /**
+   * Auto-incrementing ID for new posts.
+   */
   id: number;
+
+  /**
+   * The ID of the user who created the post.
+   */
   userId: number;
 }
 
+/**
+ * Represents the initial state for the post slice.
+ */
 const initialState: PostSliceState = {
   posts: undefined,
   status: PostStatus.INIT,
@@ -30,6 +48,9 @@ export const postSlice = createAppSlice({
   name: "posts",
   initialState,
   reducers: (create) => ({
+    /**
+     * Fetches a list of posts from the server. Reverses the posts to order in descending order.
+     */
     listPosts: create.asyncThunk(
       async () => {
         return (await postApi.listPosts()).reverse();
@@ -47,10 +68,13 @@ export const postSlice = createAppSlice({
         },
       }
     ),
+    /**
+     * Creates a new post.
+     */
     createPost: create.asyncThunk(
       async (data: Post) => {
         /**
-         * the mock create result is always id 101, that is why the data is returned instead
+         * the mock created result is always id 101, that is why the data is returned instead
          */
         await postApi.createPost(data);
         return data;
@@ -73,6 +97,9 @@ export const postSlice = createAppSlice({
         },
       }
     ),
+    /**
+     * Updates an existing post.
+     */
     updatePost: create.asyncThunk(
       async (data: Post) => {
         if (data.id > 100) {
@@ -103,6 +130,9 @@ export const postSlice = createAppSlice({
         },
       }
     ),
+    /**
+     * Deletes an existing post.
+     */
     deletePost: create.asyncThunk(
       async (id: number) => {
         await postApi.deletePost(id);

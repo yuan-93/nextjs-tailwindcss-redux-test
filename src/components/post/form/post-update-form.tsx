@@ -2,15 +2,12 @@
 
 import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
-import {
-  PostStatus,
-  selectPost,
-  updatePost,
-} from "@/lib/redux/features/post/post-slice";
+import { selectPost, updatePost } from "@/lib/redux/features/post/post-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useRouter } from "next/navigation";
 import { InputPostBody } from "./input-post-body";
 import { InputPostTitle } from "./input-post-title";
+import { PostStatus } from "@/models/post";
 
 interface PostUpdateFormProps {
   id: number;
@@ -27,10 +24,12 @@ export function PostUpdateForm(props: PostUpdateFormProps) {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // get the form data
     const formData = new FormData(event.currentTarget);
     const title = formData.get("title") as string;
     const body = formData.get("body") as string;
 
+    // update the post
     await dispatch(updatePost({ id: id, userId, title, body })).unwrap();
 
     router.back();

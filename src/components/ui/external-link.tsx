@@ -4,6 +4,9 @@ interface ExternalLinkProps {
   newTab?: boolean;
 }
 
+/**
+ * Renders an external link component with recommeneded security attributes.
+ */
 export function ExternalLink(props: ExternalLinkProps) {
   const { href, children, newTab } = props;
 

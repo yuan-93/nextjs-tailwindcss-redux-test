@@ -1,9 +1,13 @@
 import { Post } from "@/models/post";
 
+/**
+ * The Mock API endpoint for posts
+ */
 const endPoint = "https://jsonplaceholder.typicode.com/posts";
 
 export class PostApi {
   endPoint: string;
+
   constructor() {
     this.endPoint = endPoint;
     this.getPost = this.getPost.bind(this);
@@ -13,6 +17,12 @@ export class PostApi {
     this.deletePost = this.deletePost.bind(this);
   }
 
+  /**
+   * Retrieves a post by its ID from the server.
+   * @param id - The ID of the post to retrieve.
+   * @returns A Promise that resolves to the retrieved post.
+   * @throws An error if the request to retrieve the post fails.
+   */
   async getPost(id: number): Promise<Post> {
     const response = await fetch(`${this.endPoint}/${id}`);
     if (!response.ok) {
@@ -21,6 +31,11 @@ export class PostApi {
     return response.json();
   }
 
+  /**
+   * Fetches a list of posts from the server.
+   * @returns A promise that resolves to an array of Post objects.
+   * @throws An error if the request fails.
+   */
   async listPosts(): Promise<Post[]> {
     const response = await fetch(this.endPoint);
     if (!response.ok) {
@@ -29,6 +44,12 @@ export class PostApi {
     return await response.json();
   }
 
+  /**
+   * Creates a new post.
+   * @param body - The post object to be created.
+   * @returns A Promise that resolves to the created post.
+   * @throws An error if the request to create the post fails.
+   */
   async createPost(body: Post): Promise<Post> {
     const response = await fetch(this.endPoint, {
       method: "POST",
@@ -41,6 +62,12 @@ export class PostApi {
     return await response.json();
   }
 
+  /**
+   * Updates a post.
+   * @param body - The updated post object.
+   * @returns A Promise that resolves to the updated post.
+   * @throws An error if the update fails.
+   */
   async updatePost(body: Post): Promise<Post> {
     const response = await fetch(`${this.endPoint}/${body.id}`, {
       method: "PUT",
@@ -53,6 +80,11 @@ export class PostApi {
     return await response.json();
   }
 
+  /**
+   * Deletes a post with the specified ID.
+   * @param id - The ID of the post to delete.
+   * @throws Error if the request to delete the post fails.
+   */
   async deletePost(id: number): Promise<void> {
     const response = await fetch(`${this.endPoint}/${id}`, {
       method: "DELETE",

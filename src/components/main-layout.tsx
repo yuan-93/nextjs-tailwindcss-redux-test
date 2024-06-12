@@ -5,6 +5,9 @@ export interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
+/**
+ * Renders the main layout component. Context providers are wrapped here
+ */
 export function MainLayout(props: MainLayoutProps) {
   const { children } = props;
   return (
