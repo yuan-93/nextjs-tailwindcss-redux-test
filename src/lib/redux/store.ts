@@ -13,7 +13,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 // creating unique store instances, which is particularly important for
 // server-side rendering (SSR) scenarios. In SSR, separate store instances
 // are needed for each request to prevent cross-request state pollution.
-export const makeStore = () => {
+export const makeStore = (preloadedState?: Partial<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     // Adding the api middleware enables caching, invalidation, polling,
@@ -21,6 +21,7 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware().concat();
     },
+    preloadedState,
   });
 };
 

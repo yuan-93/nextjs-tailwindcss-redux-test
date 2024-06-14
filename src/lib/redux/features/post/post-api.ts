@@ -1,14 +1,17 @@
 import { Post } from "@/models/post";
 
-/**
- * The Mock API endpoint for posts
- */
-const endPoint = "https://jsonplaceholder.typicode.com/posts";
+interface PostApiParams {
+  /**
+   * The Mock API endpoint for posts
+   */
+  endPoint: string;
+}
 
 export class PostApi {
   endPoint: string;
 
-  constructor() {
+  constructor(params: PostApiParams) {
+    const { endPoint } = params;
     this.endPoint = endPoint;
     this.getPost = this.getPost.bind(this);
     this.listPosts = this.listPosts.bind(this);

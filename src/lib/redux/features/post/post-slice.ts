@@ -42,7 +42,13 @@ const initialState: PostSliceState = {
   userId: 1,
 };
 
-const postApi = new PostApi();
+if (!process.env.NEXT_PUBLIC_POST_END_POINT) {
+  throw new Error("NEXT_PUBLIC_POST_END_POINT is not set");
+}
+
+const postApi = new PostApi({
+  endPoint: process.env.NEXT_PUBLIC_POST_END_POINT,
+});
 
 export const postSlice = createAppSlice({
   name: "posts",
