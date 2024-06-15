@@ -25,6 +25,7 @@ afterAll(() => server.close());
 describe("Rendering and API Integration of Home Page", () => {
   it("shows home page and loaded posts", async () => {
     renderWithProviders(<HomePage />);
+
     // should render
     expect(screen.getByText(/Posts/i)).toBeInTheDocument();
 

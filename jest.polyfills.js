@@ -27,7 +27,8 @@ Object.defineProperties(globalThis, {
   Blob: { value: Blob },
   File: { value: File },
   Headers: { value: Headers },
-  FormData: { value: FormData },
+  // learn more https://github.com/mswjs/msw/discussions/1919
+  // FormData: { value: FormData },
   Request: { value: Request },
   Response: { value: Response },
 });

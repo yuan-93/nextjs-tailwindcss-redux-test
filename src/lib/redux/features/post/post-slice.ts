@@ -35,10 +35,10 @@ export interface PostSliceState {
 /**
  * Represents the initial state for the post slice.
  */
-const initialState: PostSliceState = {
+export const initialState: PostSliceState = {
   posts: undefined,
   status: PostStatus.INIT,
-  id: 101,
+  id: 0,
   userId: 1,
 };
 
@@ -68,6 +68,10 @@ export const postSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.status = PostStatus.IDLE;
           state.posts = action.payload;
+          /**
+           * increment the id to the next available id
+           */
+          state.id = action.payload[0].id + 1;
         },
         rejected: (state) => {
           state.status = PostStatus.ERROR;
